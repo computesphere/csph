@@ -62,7 +62,7 @@ CHECKSUMS="linux_macos_sha256S_checksums.txt"
 # --- resolve version ---------------------------------------------------------
 VERSION="${CSPH_VERSION:-}"
 if [ -z "$VERSION" ]; then
-  info "Resolving latest release…"
+  info "Resolving latest release..."
   # Read the tag_name from the GitHub releases API (downloader-agnostic).
   VERSION=$(dl_out "https://api.github.com/repos/$REPO/releases/latest" 2>/dev/null \
     | grep -m1 '"tag_name"' \
@@ -78,7 +78,7 @@ info "Installing csph $VERSION ($OS/$ARCH)"
 TMP=$(mktemp -d 2>/dev/null || mktemp -d -t csph)
 trap 'rm -rf "$TMP"' EXIT INT TERM
 
-info "Downloading $ASSET…"
+info "Downloading $ASSET..."
 dl "$BASE/$ASSET" "$TMP/$ASSET" || \
   error "download failed: $BASE/$ASSET (does version $VERSION ship $OS/$ARCH?)"
 
