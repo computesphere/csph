@@ -36,7 +36,7 @@ $Checksums = 'windows_sha256_checksums.txt'
 # --- resolve version ---------------------------------------------------------
 $Version = $env:CSPH_VERSION
 if (-not $Version) {
-  Info 'Resolving latest release…'
+  Info 'Resolving latest release...'
   $resp = Invoke-WebRequest -Uri "https://github.com/$Repo/releases/latest" -MaximumRedirection 0 -ErrorAction SilentlyContinue
   $loc  = $resp.Headers.Location
   if (-not $loc) { $loc = $resp.Headers['Location'] }
@@ -51,7 +51,7 @@ $Tmp = Join-Path $env:TEMP ("csph-" + [System.Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $Tmp -Force | Out-Null
 try {
   # --- download --------------------------------------------------------------
-  Info "Downloading $Asset…"
+  Info "Downloading $Asset..."
   try { Invoke-WebRequest -Uri "$Base/$Asset" -OutFile (Join-Path $Tmp $Asset) }
   catch { Die "download failed: $Base/$Asset (does version $Version ship windows/$Arch?)" }
 
