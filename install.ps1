@@ -73,8 +73,12 @@ try {
 
   # --- extract ---------------------------------------------------------------
   Expand-Archive -Path (Join-Path $Tmp $Asset) -DestinationPath $Tmp -Force
-  $bin = Get-ChildItem -Path $Tmp -Recurse -Filter $Binary | Select-Object -First 1
-  if (-not $bin) { Die "could not find '$Binary' inside $Asset" }
+  # The archive ships the binary as computesphere.exe (GoReleaser's default name)
+  # rather than csph.exe, so accept either and install it as csph.exe.
+  $bin = Get-ChildItem -Path $Tmp -Recurse -File |
+    Where-Object { $_.Name -in @('csph.exe', 'computesphere.exe') } |
+    Select-Object -First 1
+  if (-not $bin) { Die "could not find the csph binary inside $Asset" }
 
   # --- install ---------------------------------------------------------------
   $InstallDir = $env:CSPH_INSTALL_DIR
