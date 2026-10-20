@@ -34,7 +34,7 @@ extract it, and put `csph` on your `PATH`.
 
 ## Documentation
 
-See the [ComputeSphere CLI docs](https://docs.computesphere.com/docs/cli/getting-started).
+See the [ComputeSphere CLI docs](https://computesphere.com/docs/cli/getting-started).
 
 ---
 
