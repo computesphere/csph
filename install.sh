@@ -125,6 +125,8 @@ case ":$PATH:" in
   *":$INSTALL_DIR:"*) : ;;
   *)
     RUN="$INSTALL_DIR/$BINARY"
+    # Quote a path with a space so the line pastes as one command.
+    case "$RUN" in *" "*) RUN="\"$RUN\"" ;; esac
     if [ "${CSPH_NO_MODIFY_PATH:-0}" != "1" ]; then
       warn "$INSTALL_DIR is not on your PATH."
       printf '  Add it by appending this to your shell profile:\n\n    export PATH="%s:$PATH"\n\n' "$INSTALL_DIR"
